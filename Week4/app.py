@@ -42,11 +42,17 @@ def signIn():
     # 和資料庫互動
     collections=db.user
     result=collections.find_one({"$and":[{"email":email},{"password":password}]})
-
-    if result==None:
+    agree = request.form.get("agree")
+    print(agree)
+    if agree == None:   
+        return redirect("/")
+    
+    elif result==None:
         return redirect("/error?msg=帳號或密碼錯誤")
-    session["email"]=result["email"]
-    return redirect("/member")
+
+    else:    
+        session["email"]=result["email"]
+        return redirect("/member")
 
 @app.route("/signOut")
 def signOut():
