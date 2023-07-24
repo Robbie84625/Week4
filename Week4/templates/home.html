@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+    <meta charset="utf-8"/>
+    <title>My Webside</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS_Selectors.css') }}"/>
+</head>
+<body>
+    <div class="welcome">歡迎光臨請輸入帳號密碼</div>
+    <div class="UI">
+        <div id="titleText">登入系統</div>
+        
+        <form action="signIn" method="POST">
+            <div id="titleText">信箱：<input type="text" name="email" /></div>
+            <div id="titleText">密碼：<input type="password" name="password" /></div>
+            <div style="text-align: center;font-size: 16px;margin: 5px;">同意條款<input type="checkbox" id="agree"></div>
+            <div id="titleText" onclick="agree()"><button>註冊</button></div>
+        </form>
+
+    </div>
+    <script>
+        function agree()
+        {
+            var agree = document.getElementById('agree');
+            if (agree.checked==false)
+            {
+                alert('請優先勾選同意條款後再進行註冊。');
+            }
+            window.history.back();
+        }
+    </script>
+</body>
+</html>
