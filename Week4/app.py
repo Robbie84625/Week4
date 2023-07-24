@@ -1,10 +1,3 @@
-import pymongo
-from pymongo.mongo_client import MongoClient
-from bson.objectid import ObjectId
-
-client = MongoClient("mongodb+srv://root123:root123@robbiedatabase.sznohbr.mongodb.net/?retryWrites=true&w=majority")
-db = client.myWebside 
-
 from flask import *
 
 app=Flask(__name__,
@@ -12,6 +5,8 @@ app=Flask(__name__,
         static_url_path="/" # 靜態檔案對應的網址路徑
         )
 
+
+data = {"test": "test"}
 
 # 設定首頁
 @app.route("/")
@@ -21,7 +16,7 @@ def home():
 # 設定會員頁
 @app.route("/member")
 def member():
-    if 'email' in session:
+    if "account" in session:
         return render_template("member.html")
     else:
         return redirect("/")
@@ -29,35 +24,33 @@ def member():
 #設定登入失敗
 @app.route("/error")
 def error():
-    msg=request.args.get("msg","發生錯誤，請聯繫客服")
-    return render_template("error.html",msg=msg)
+    msg=request.args.get("message","發生錯誤，請聯繫客服")
+    return render_template("error.html",message=msg)
 
-#設定登入方法
-@app.route("/signIn",methods=["POST"])
-def signIn():
+# 設定登入方法
+@app.route("/signin",methods=["POST"])
+def signin():
     # 從前端接收資料
-    email=request.form["email"]
+    account=request.form["account"]
     password=request.form["password"]
     
-    # 和資料庫互動
-    collections=db.user
-    result=collections.find_one({"$and":[{"email":email},{"password":password}]})
-    agree = request.form.get("agree")
-    print(agree)
-    if agree == None:   
-        return redirect("/")
-    
-    elif result==None:
-        return redirect("/error?msg=帳號或密碼錯誤")
+    if not account or not password:
+        return redirect("/error?message=請輸入用戶名和密碼")
+
+    # 檢查帳號是否存在並且密碼是否正確
+    if account not in data or password != data[account]:
+        return redirect("/error?message=用戶名或密碼不正確")
 
     else:    
-        session["email"]=result["email"]
+        session["account"] = account
         return redirect("/member")
 
-@app.route("/signOut")
-def signOut():
-    del session['email']
+@app.route("/signout")
+def signout():
+    if "account" in session: 
+        del session["account"]
+        return redirect("/")
     return redirect("/")
-
+    
 app.secret_key="a123456789" # 設定session密鑰
 app.run(port=3000)

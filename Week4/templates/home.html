@@ -11,28 +11,24 @@
     <div class="UI">
         <div id="titleText">登入系統</div>
         
-        <form action="signIn" method="POST">
-            <div id="titleText">信箱：<input type="text" name="email" /></div>
+        <form action="signin" method="POST" onsubmit="return agree();">
+            <div id="titleText">帳號：<input type="text" name="account" /></div>
             <div id="titleText">密碼：<input type="password" name="password" /></div>
-            <div style="text-align: center;font-size: 16px;margin: 5px;">同意條款<input type="checkbox" name="agree" ></div>
-            <div id="titleText" onclick="agree()"><button>註冊</button></div>
+            <div style="text-align: center;font-size: 16px;margin: 5px;">同意條款<input type="checkbox" id="agreeCheckbox"></div>
+            <div id="titleText"><button>登入</button></div>
         </form>
 
     </div>
     <script>
         function agree()
         {
-            var agreeCheckbox = document.getElementById('agree');
-            if (agreeCheckbox.checked) 
+            var agreeCheckbox = document.getElementById('agreeCheckbox');
+            if (!agreeCheckbox.checked) 
             {
-                alert('請優先勾選同意條款後再進行註冊。');
-                agreeCheckbox.value = "true";
+                alert('請優先檢查複選框。');
+                return false; 
             }
-            else 
-            {
-                agreeCheckbox.value = "false";
-            }
-            window.history.back();
+            return true;
         }
     </script>
 </body>
