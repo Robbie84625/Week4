@@ -7,12 +7,11 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS_Selectors.css') }}"/>
 </head>
 <body>
-    <div class="welcome">歡迎光臨! 會員頁面</div>
+    <div class="welcome">正整數平方計算結果</div>
     <div class="UI">
-        <div id="titleText">恭喜你! 成功登入系統</div>
-        <!--絕對路徑-->
-        <form action="/">
-            <div id="titleText"><button>登出</button></div>
+        <div id="titleText">{{ result }}</div>
+        <form action="back">
+            <div id="titleText"><button>返回首頁</button></div>
         </form>
     </div>
 </body>

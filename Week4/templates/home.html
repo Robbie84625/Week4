@@ -10,7 +10,6 @@
     <div class="welcome">歡迎光臨請輸入帳號密碼</div>
     <div class="UI">
         <div id="titleText">登入系統</div>
-        
         <form action="signin" method="POST" onsubmit="return agree();">
             <div id="titleText">帳號：<input type="text" name="account" /></div>
             <div id="titleText">密碼：<input type="password" name="password" /></div>
@@ -18,14 +17,36 @@
             <div id="titleText"><button>登入</button></div>
         </form>
 
+        <hr style="margin: 30px;"/>
+
+        <div id="titleText">計算正整數平方</div>
+        <form action="calculate" onsubmit="return positiveCheck();">
+            <div id="titleText">正整數：<input type="text" name="inputNumber" id="positiveNumber" /></div>
+            <div id="titleText"><button>計算</button></div>
+        </form>
+
     </div>
     <script>
         function agree()
         {
-            var agreeCheckbox = document.getElementById('agreeCheckbox');
+            let agreeCheckbox = document.getElementById('agreeCheckbox');
             if (!agreeCheckbox.checked) 
             {
                 alert('請優先檢查複選框。');
+                return false; 
+            }
+            return true;
+        }
+        function positiveCheck()
+        {
+            let positiveInteger = document.getElementById("positiveNumber");
+            //javascript方法，取得的text為去掉頭尾空格
+            let inputValue = positiveInteger.value.trim();
+
+            //假如inputValue===空值||isNaN(inputValue)==True||轉換數字<=0
+            if (inputValue === '' || isNaN(inputValue) || parseInt(inputValue) <= 0)  
+            {
+                alert('請輸入正整數');
                 return false; 
             }
             return true;

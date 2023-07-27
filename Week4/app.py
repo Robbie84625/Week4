@@ -51,6 +51,21 @@ def signout():
         del session["account"]
         return redirect("/")
     return redirect("/")
-    
+
+@app.route("/square/back")
+def back():
+    return redirect("/")
+
+
+@app.route('/calculate')
+def calculate():
+    number=request.args.get("inputNumber")
+    return redirect(url_for('square', number=number))
+
+
+@app.route('/square/<int:number>')
+def square(number):
+    return render_template('square.html', number=number, result=number**2)
+
 app.secret_key="a123456789" # 設定session密鑰
-app.run(port=3000)
+app.run(port=5000)
