@@ -68,4 +68,4 @@ def square(number):
     return render_template('square.html', number=number, result=number**2)
 
 app.secret_key="a123456789" # 設定session密鑰
-app.run(port=5000)
+app.run(port=3000)
