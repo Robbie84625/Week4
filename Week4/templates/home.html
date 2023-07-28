@@ -20,10 +20,10 @@
         <hr style="margin: 30px;"/>
 
         <div id="titleText">計算正整數平方</div>
-        <form action="calculate" onsubmit="return positiveCheck();">
+        <!--<form action="calculate" onsubmit="return positiveCheck();">-->
             <div id="titleText">正整數：<input type="text" name="inputNumber" id="positiveNumber" /></div>
-            <div id="titleText"><button>計算</button></div>
-        </form>
+            <div id="titleText"><button onclick="positiveCheck()" >計算</button></div>
+        <!--</form>-->
 
     </div>
     <script>
@@ -49,8 +49,11 @@
                 alert('請輸入正整數');
                 return false; 
             }
+            const url = `/square/${inputValue}`;
+            document.location.href=url;
             return true;
         }
+
     </script>
 </body>
 </html>

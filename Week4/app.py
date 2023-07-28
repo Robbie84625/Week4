@@ -56,13 +56,6 @@ def signout():
 def back():
     return redirect("/")
 
-
-@app.route('/calculate')
-def calculate():
-    number=request.args.get("inputNumber")
-    return redirect(url_for('square', number=number))
-
-
 @app.route('/square/<int:number>')
 def square(number):
     return render_template('square.html', number=number, result=number**2)
