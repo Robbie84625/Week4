@@ -46,15 +46,13 @@ def signin():
         return redirect("/member")
 
 @app.route("/signout")
+@app.route("/square/back")
 def signout():
     if "account" in session: 
         del session["account"]
         return redirect("/")
     return redirect("/")
 
-@app.route("/square/back")
-def back():
-    return redirect("/")
 
 @app.route('/square/<int:number>')
 def square(number):
